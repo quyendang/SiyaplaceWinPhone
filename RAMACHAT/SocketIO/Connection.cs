@@ -1,4 +1,5 @@
 ﻿using Coding4Fun.Toolkit.Controls;
+using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -84,9 +85,19 @@ namespace RAMACHAT.SocketIO
                                 App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.senderId, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message, Avatar = new Uri(resultObject.data.avatar) });
                                 if(resultObject.data.senderId != App._userid)
                                 {
-                                    MediaElement el = new MediaElement();
-                                    el.Source = new Uri("Assets/Audio/recieve.wav", UriKind.RelativeOrAbsolute);
-                                    el.Play();
+                                    //try
+                                    //{
+                                    //    Dispatcher eld = Deployment.Current.Dispatcher;
+                                    //    eld.BeginInvoke(() =>
+                                    //    {
+                                    //        Song s = Song.FromUri("el", new Uri(@"Assets/Audio/recieve.wav", UriKind.RelativeOrAbsolute));
+                                    //        MediaPlayer.IsRepeating = false;
+                                    //        MediaPlayer.Play(s);
+                                    //    });
+                                    //}
+                                    //catch(Exception)
+                                    //{ }
+
                                     ToastPrompt tost = new ToastPrompt()
                                     {
                                         Title = resultObject.data.senderName,
