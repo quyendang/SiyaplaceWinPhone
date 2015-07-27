@@ -1,0 +1,67 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="RAMACHAT.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"  
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Background1.jpg"/>
+        </Grid.Background>
+        <phone:Pivot IsLocked="True" Name="mainPivot">
+            <phone:PivotItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="SIGNIN" FontSize="50" HorizontalAlignment="Center" FontFamily="Segoe WP Black"/>
+                    <TextBox Name="userTbn" Height="70" Foreground="Gray" BorderThickness="0,0,0,1" Grid.Row="1"/>
+                    <TextBox Name="passTbn" Height="70" Foreground="Gray" BorderThickness="0,0,0,1" Grid.Row="2"/>
+                    <Grid Grid.Row="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <c4f:RoundButton Name="signBtn" Click="signBtn_Click" Grid.Column="0" ButtonHeight="100" ButtonWidth="100" Stretch="None" ImageSource="/Assets/next.png" />
+                        <c4f:RoundButton Name="signupBtn" Click="signupBtn_Click" Grid.Column="1" ButtonHeight="100" ButtonWidth="100" Stretch="None" ImageSource="/Assets/edit.png" />
+                    </Grid>
+                    
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="SIGNUP" FontSize="50" FontFamily="Segoe WP Black" HorizontalAlignment="Center" />
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>
