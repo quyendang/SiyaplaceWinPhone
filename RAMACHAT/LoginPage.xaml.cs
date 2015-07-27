@@ -13,6 +13,8 @@ using RAMACHAT.ApiClient;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Windows.Media;
+using RAMACHAT.Helper;
+using System.IO.IsolatedStorage;
 
 namespace RAMACHAT
 {
@@ -22,9 +24,24 @@ namespace RAMACHAT
         public LoginPage()
         {
             InitializeComponent();
+           
         }
 
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //App.ViewModel.Items.Clear();
+        //        if (App._token != null && App._username != null && App._userid != null)
+        //        {
+        //            App.connectView.TOKEN = App._token;
+        //            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        //        }
+        //    }
+        //    catch
+        //    { }
 
+        //}
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             // put any code you like here
@@ -74,7 +91,9 @@ namespace RAMACHAT
                 App._token = resultObject.data.token;
                 App._userid = resultObject.data._id;
                 App._username = resultObject.data.username;
-                //App._
+                IsolatedStorageSettings.ApplicationSettings["TOKEN"] = resultObject.data.token;
+                IsolatedStorageSettings.ApplicationSettings["USERID"] = resultObject.data._id;
+                IsolatedStorageSettings.ApplicationSettings["USERNAME"] = resultObject.data.username;
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
             else

@@ -1,4 +1,5 @@
 ﻿using Coding4Fun.Toolkit.Controls;
+using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -14,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace RAMACHAT.SocketIO
@@ -97,12 +99,13 @@ namespace RAMACHAT.SocketIO
                                     //}
                                     //catch(Exception)
                                     //{ }
-
+                                    App._reuserid = resultObject.data.senderId;
                                     ToastPrompt tost = new ToastPrompt()
                                     {
                                         Title = resultObject.data.senderName,
-                                        Message = resultObject.data.message
+                                        Message = resultObject.data.message,
                                     };
+                                    tost.Tap += tosk_Tap;
                                     tost.Show();
                                 }
                             });
@@ -120,6 +123,11 @@ namespace RAMACHAT.SocketIO
                 {
                     Debug.WriteLine("No token found!");
                 }
+        }
+
+        private void tosk_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/ChatPage.xaml", UriKind.RelativeOrAbsolute));
         }
         public void sendMesS(string senderId, bool isGroup, string message, int type, string senderName, JArray memberArray, string sequence)
         {

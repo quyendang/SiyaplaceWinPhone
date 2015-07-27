@@ -98,6 +98,7 @@
     <Compile Include="ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper\IsolatedStorageHelper.cs" />
     <Compile Include="Helper\ObjectToInt.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="LoginPage.xaml.cs">

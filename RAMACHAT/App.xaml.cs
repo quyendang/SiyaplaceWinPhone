@@ -11,6 +11,8 @@ using Microsoft.Phone.Shell;
 using RAMACHAT.Resources;
 using RAMACHAT.ViewModels;
 using RAMACHAT.SocketIO;
+using RAMACHAT.Helper;
+using System.IO.IsolatedStorage;
 
 namespace RAMACHAT
 {
@@ -50,6 +52,15 @@ namespace RAMACHAT
         /// </summary>
         public App()
         {
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("TOKEN"))
+            { App._token = IsolatedStorageSettings.ApplicationSettings["TOKEN"].ToString(); }
+            else { }
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("USERID"))
+            { App._userid = IsolatedStorageSettings.ApplicationSettings["USERID"].ToString(); }
+            else { }
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("USERNAME"))
+            { App._username = IsolatedStorageSettings.ApplicationSettings["USERNAME"].ToString(); }
+            else { }
             App.connectView = new Connection();
             App.client = new ApiClient.Client();
             // Global handler for uncaught exceptions.
