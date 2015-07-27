@@ -41,6 +41,7 @@
 											Name="rectangle3" VerticalAlignment="Top"
 										 HorizontalAlignment="Stretch">
                     <Grid>
+                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="38" />
