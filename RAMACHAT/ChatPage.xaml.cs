@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using System.Windows.Input;
 using Newtonsoft.Json;
 using RAMACHAT.Model;
+using System.Diagnostics;
 
 namespace RAMACHAT
 {
@@ -22,11 +23,13 @@ namespace RAMACHAT
             InitializeComponent();
             DataContext = App.ViewModel;
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
                 try
                 {
-                    //App.ViewModel.Items.Clear();
+                    string userInfo = await App.client.getUserById(App._reuserid);
+                    FriendInfo userObject = JsonConvert.DeserializeObject<FriendInfo>(userInfo);
+                    Username.Text = userObject.data.username;
                     App.client.getRoomMessagesByUserId(App._reuserid);
                 }
             catch

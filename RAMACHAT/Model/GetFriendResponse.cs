@@ -14,6 +14,14 @@ namespace RAMACHAT.Model
         public bool isOnline { get; set; }
         public bool isFollow { get; set; }
     }
+    public class FriendInfo
+    {
+        public bool success { get; set; }
+        public int statusCode { get; set; }
+        public string message { get; set; }
+        public User data { get; set; }
+
+    }
     public class GetFriendResponse
     {
         public bool success { get; set; }
