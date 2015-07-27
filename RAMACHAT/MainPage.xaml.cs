@@ -13,7 +13,10 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using RAMACHAT.Model;
-
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 namespace RAMACHAT
 {
     public partial class MainPage : PhoneApplicationPage
@@ -26,8 +29,12 @@ namespace RAMACHAT
         public MainPage()
         {
             InitializeComponent();
-
-            App.connectView.connectSocket();
+            Dispatcher dispatcher = Deployment.Current.Dispatcher;
+            dispatcher.BeginInvoke(() =>
+            {
+                App.connectView.connectSocket();
+            });
+            
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             //App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = "aaa", CreateAt = "aaaa", MessageText = "AAA" });

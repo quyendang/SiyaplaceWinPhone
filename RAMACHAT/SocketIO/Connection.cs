@@ -17,7 +17,6 @@ namespace RAMACHAT.SocketIO
 {
     public class Connection
     {
-        private ManualResetEvent ManualResetEvent = null;
         public string TOKEN = null;
         public string HOSTNAME = "http://128.199.113.218:3000";
         public Socket mSocket;
@@ -39,22 +38,33 @@ namespace RAMACHAT.SocketIO
                         Dictionary<string, string> _author = new Dictionary<string, string>();
                         _author.Add("token", this.TOKEN);
                         IO.Options _option = new IO.Options();
-                        _option.Timeout = 5000;
+                        //_option.Timeout = 5000;
                         _option.Query = _author;
+                        _option.ForceNew = true;
                         _option.Reconnection = true;
-                        _option.ReconnectionDelay = 0;
+                        _option.ReconnectionDelay = 500;
                         
-                        ManualResetEvent = new ManualResetEvent(false);
                         mSocket = IO.Socket(HOSTNAME, _option);
                         mSocket.On(Socket.EVENT_CONNECT, () =>
                         {
+                            Dispatcher dispatcher = Deployment.Current.Dispatcher;
+                            dispatcher.BeginInvoke(() =>
+                            {
+                                //MessageBox.Show("OK");
+                            });
                             Debug.WriteLine("OK");
                         });
                         mSocket.On(Socket.EVENT_CONNECT_ERROR, onConnectError);
                         mSocket.On(Socket.EVENT_CONNECT_TIMEOUT, onConnectTimeout);
                         mSocket.On(Socket.EVENT_ERROR, () =>
                         {
-                            Debug.WriteLine("ERROR");
+                            Dispatcher dispatcher = Deployment.Current.Dispatcher;
+                            dispatcher.BeginInvoke(() =>
+                            {
+                               // MessageBox.Show("ERROR");
+                                mSocket.Connect();
+                                mSocket.Open();
+                            });
                         });
                         mSocket.On(Constant.SOCKET_EVENT_JOIN, onJoinRoom);
                         mSocket.On(Constant.SOCKET_EVENT_ADD, onAddUser);
@@ -77,8 +87,8 @@ namespace RAMACHAT.SocketIO
                 catch(Exception e)
                     {
                         Debug.WriteLine("IO exception  " + e.Message);
-                        mSocket.Close();
-                        mSocket.Open();
+                        //mSocket.Close();
+                       // mSocket.Open();
                     }
                 }
                 else
@@ -136,12 +146,22 @@ namespace RAMACHAT.SocketIO
 
         private void onConnectTimeout(object obj)
         {
-            Debug.WriteLine("Connection time out!");
+            Dispatcher dispatcher = Deployment.Current.Dispatcher;
+            dispatcher.BeginInvoke(() =>
+            {
+                //MessageBox.Show("ERROR TIME OUT");
+                mSocket.Connect();
+            });
         }
 
         private void onConnectError(object obj)
         {
-            Debug.WriteLine("Connection error!");
+            Dispatcher dispatcher = Deployment.Current.Dispatcher;
+            dispatcher.BeginInvoke(() =>
+            {
+                //MessageBox.Show("ERROR Connect ");
+                mSocket.Connect();
+            });
         }
 
     }
