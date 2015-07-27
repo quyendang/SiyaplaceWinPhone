@@ -1,5 +1,7 @@
 ﻿using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -99,6 +101,12 @@ namespace RAMACHAT.SocketIO
                                     //}
                                     //catch(Exception)
                                     //{ }
+                                    var stream = Application.GetResourceStream(new Uri(@"Assets/Audio/recieve.wav", UriKind.RelativeOrAbsolute));
+                                    var effect = SoundEffect.FromStream(stream.Stream);
+                                    var soundInstance = effect.CreateInstance();
+
+                                    FrameworkDispatcher.Update();
+                                    soundInstance.Play();
                                     App._reuserid = resultObject.data.senderId;
                                     ToastPrompt tost = new ToastPrompt()
                                     {
