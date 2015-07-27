@@ -22,12 +22,16 @@ namespace RAMACHAT
             InitializeComponent();
             DataContext = App.ViewModel;
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
                 try
                 {
+                    string userInfo = await App.client.getUserById(App._reuserid);
+                    FriendInfo userObject = JsonConvert.DeserializeObject<FriendInfo>(userInfo);
+                    people.Text = userObject.data.username.ToString();
                     //App.ViewModel.Items.Clear();
                     App.client.getRoomMessagesByUserId(App._reuserid);
+                    
                 }
             catch
                 { }

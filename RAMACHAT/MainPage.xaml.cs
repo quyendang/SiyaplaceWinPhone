@@ -51,11 +51,11 @@ namespace RAMACHAT
             //ContactListBox.Items.Clear();
             if (friendList.SelectedItem != null && friendList != null)
             {
-                User Item = (User)friendList.SelectedItem;
+                User Item = (User)friendList.SelectedItem; 
                 App._reuserid = Item._id;
                 NavigationService.Navigate(new Uri("/ChatPage.xaml", UriKind.Relative));
             }{ }
-           friendList.SelectedItem = null;
+            friendList.SelectedItem = null;
         }
         
     }

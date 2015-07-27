@@ -118,7 +118,7 @@
         <phone:Panorama>
           
             
-            <phone:PanoramaItem Header="friends">
+            <phone:PanoramaItem Header="Friends">
                 <ListBox Name="friendList" SelectionChanged="ContactListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -138,7 +138,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </phone:PanoramaItem>
-            <phone:PanoramaItem Header="chat">
+            <phone:PanoramaItem Header="Recent">
                 
                 <!--<Grid>
                     <Grid.RowDefinitions>

@@ -10,10 +10,9 @@
     xmlns:helper="clr-namespace:RAMACHAT.Helper"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False" Foreground="Black" Background="#FF008F41">
     <phone:PhoneApplicationPage.Resources>
         <helper:ObjectToInt x:Key="ObjectToInt"/>
         <DataTemplate x:Key="ImageOnLeftItemTemplate">
@@ -119,7 +118,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Name="people" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="#FF6A6A6A" FontSize="36"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
