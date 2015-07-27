@@ -156,6 +156,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Audio\recieve.wav" />
     <Content Include="Assets\conversation_cloud_background_transparent.png" />
     <Content Include="Assets\edit.png" />
     <Content Include="Assets\next.png" />

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Coding4Fun.Toolkit.Controls;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
 using RAMACHAT.Model;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace RAMACHAT.SocketIO
@@ -80,6 +82,18 @@ namespace RAMACHAT.SocketIO
                                 Debug.WriteLine(resultObject.data.message);
                                 Debug.WriteLine(resultObject.data.avatar);
                                 App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.senderId, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message, Avatar = new Uri(resultObject.data.avatar) });
+                                if(resultObject.data.senderId != App._userid)
+                                {
+                                    MediaElement el = new MediaElement();
+                                    el.Source = new Uri("Assets/Audio/recieve.wav", UriKind.RelativeOrAbsolute);
+                                    el.Play();
+                                    ToastPrompt tost = new ToastPrompt()
+                                    {
+                                        Title = resultObject.data.senderName,
+                                        Message = resultObject.data.message
+                                    };
+                                    tost.Show();
+                                }
                             });
                         });
                         mSocket.Connect();
