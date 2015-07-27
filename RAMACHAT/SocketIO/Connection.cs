@@ -50,7 +50,7 @@ namespace RAMACHAT.SocketIO
                             Dispatcher dispatcher = Deployment.Current.Dispatcher;
                             dispatcher.BeginInvoke(() =>
                             {
-                                //MessageBox.Show("OK");
+                                MessageBox.Show("OK");
                             });
                             Debug.WriteLine("OK");
                         });
@@ -61,7 +61,7 @@ namespace RAMACHAT.SocketIO
                             Dispatcher dispatcher = Deployment.Current.Dispatcher;
                             dispatcher.BeginInvoke(() =>
                             {
-                               // MessageBox.Show("ERROR");
+                                MessageBox.Show("ERROR");
                                 mSocket.Connect();
                                 mSocket.Open();
                             });
