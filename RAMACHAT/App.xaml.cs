@@ -19,6 +19,10 @@ namespace RAMACHAT
         public static MainViewModel viewModel = null;
         public static Connection connectView = (Connection)null;
         public static ApiClient.Client client = (ApiClient.Client)null;
+        public static string _username = "";
+        public static string _token = "";
+        public static string _userid = "";
+        public static string _reuserid = "";
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>

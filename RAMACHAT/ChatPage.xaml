@@ -1,18 +1,18 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="RAMACHAT.MainPage"
+    x:Class="RAMACHAT.ChatPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:RAMACHAT"
     xmlns:helper="clr-namespace:RAMACHAT.Helper"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
     <phone:PhoneApplicationPage.Resources>
         <helper:ObjectToInt x:Key="ObjectToInt"/>
@@ -111,43 +111,27 @@
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot">
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Background1.jpg"/>
-        </Grid.Background>
-        <phone:Panorama>
-            <phone:PanoramaItem Header="friends">
-                <ListBox Name="friendList" SelectionChanged="ContactListBox_SelectionChanged">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HorizontalAlignment="Left" Margin="0,5,0,0"  >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Grid.Column="0" Stroke="White" StrokeThickness="1"  Margin="0" Height="70" Width="70" >
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding avatar}" AlignmentX="Center" AlignmentY="Center" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <TextBlock Margin="10,0,0,0" FontSize="30" Text="{Binding username}" Grid.Column="1" VerticalAlignment="Center" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </phone:PanoramaItem>
-            <phone:PanoramaItem Header="chat">
-                
-                <!--<Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="90"/>
-                    </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0" x:Name="ContactListBox" SelectedIndex="{Binding Items,Converter={StaticResource  ObjectToInt}}" ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
-                    <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
-                </Grid>-->
-            </phone:PanoramaItem>
-        </phone:Panorama>
-        
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <ListBox Grid.Row="0" x:Name="ContactListBox" LayoutUpdated="ContactListBox_LayoutUpdated"
+                     ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
+            <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
+        </Grid>
     </Grid>
+
 </phone:PhoneApplicationPage>
