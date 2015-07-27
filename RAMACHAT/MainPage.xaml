@@ -116,7 +116,7 @@
             <ImageBrush ImageSource="/Assets/Background1.jpg"/>
         </Grid.Background>
         <phone:Panorama>
-            <phone:PanoramaItem Header="friend">
+            <phone:PanoramaItem Header="friends">
                 <ListBox Name="friendList" SelectionChanged="ContactListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -141,7 +141,7 @@
                 <!--<Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="90"/>
                     </Grid.RowDefinitions>
                     <ListBox Grid.Row="0" x:Name="ContactListBox" SelectedIndex="{Binding Items,Converter={StaticResource  ObjectToInt}}" ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
                     <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>

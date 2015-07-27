@@ -53,7 +53,7 @@ namespace RAMACHAT.SocketIO
                             Dispatcher dispatcher = Deployment.Current.Dispatcher;
                             dispatcher.BeginInvoke(() =>
                             {
-                                //MessageBox.Show("OK");
+                              //  MessageBox.Show("OK");
                             });
                             Debug.WriteLine("OK");
                         });

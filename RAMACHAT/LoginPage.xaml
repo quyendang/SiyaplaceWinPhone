@@ -1,67 +1,174 @@
 ﻿<phone:PhoneApplicationPage
     x:Class="RAMACHAT.LoginPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"  
+
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="True">
+
+    <phone:Pivot  x:Name="main_pivot" IsLocked="True">
+        <phone:Pivot.Background>
+            <ImageBrush ImageSource="Assets/Background1.jpg"/>
+        </phone:Pivot.Background>
+        <phone:PivotItem x:Name="SignIn_pivotitem">
+            <Grid x:Name="LayoutRoot"  >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Height="150" Width="150" Source="images/bubbles.png"/>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="user_name_textbox" Grid.Row="0" Margin="20,0" 
+                     BorderThickness="0,0,0,0"   
+                     TextAlignment="Left" FontSize="30" Text="User Name"
+                     Foreground="Gray" GotFocus="user_box_gotfocus"
+                     LostFocus="user_box_lostfocus"
+                     />
+                    <TextBox x:Name="password_textbox" Grid.Row="1" Margin="20,0"
+                     BorderThickness="0,0,0,0" 
+                     TextAlignment="Left" FontSize="30" Text="Password"
+                     Foreground="Gray" />
+                    <PasswordBox x:Name="password_box" Grid.Row="1" Margin="20,0"
+                         BorderThickness="0,0,0,0"
+                          Opacity="0" GotFocus="password_gotfocus" 
+                         LostFocus="password_lostfocus"/>
+                    <Button x:Name="SingIn_btn" Grid.Row="2" Margin="20,0"
+                    BorderThickness="0.7,0.7,0.7,0.7" BorderBrush="White" 
+                    Content="Sign In" FontSize="38" Background="Transparent"
+                    Click="signBtn_Click" FontWeight="Thin"/>
+
+                    <Button x:Name="SignUp_btn" Grid.Row="3" Margin="20,0"
+                    BorderThickness="0.7,0.7,0.7,0.7" BorderBrush="White"
+                    Content="Sign up" FontSize="38" Background="Transparent"
+                    Click="signupBtn_Click" FontWeight="Thin"/>
+
+                    <Button x:Name="ForgotPass_btn" Grid.Row="4" Margin="20,0"
+                    BorderThickness="0.7,0.7,0.7,0.7" BorderBrush="White"
+                    Content="Forgot Password" FontSize="38" Background="Transparent"
+                    Click="ForgotPass_click" FontWeight="Thin"/>
+
+                </Grid>
+            </Grid>
+        </phone:PivotItem>
+
+        <phone:PivotItem x:Name="signup_pivotitem">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="SignUp_user_textbox" Grid.Row="0" Margin="20,0"
+                             BorderThickness="0,0,0,0" Text="User Name" 
+                             Foreground="Gray" FontSize="30" GotFocus="SignUp_textbox_gotfocus"
+                             LostFocus="SignUp_textbox_lostfocus"/>
+                    <TextBox x:Name="SignUp_pass_textbox" Grid.Row="1" Margin="20,0"
+                             BorderThickness="0,0,0,0" Text="Password"
+                             Foreground="Gray" FontSize="30"/>
+                    <PasswordBox x:Name="SignUp_pass_box" Grid.Row="1" Margin="20,0"
+                                 Opacity="0" GotFocus="password_box_gotfocus"
+                                 LostFocus="password_box_lostfocus"/>
+
+                    <TextBox x:Name="SignUp_passconfirm_textbox" Grid.Row="2" Margin="20,0"
+                             BorderThickness="0,0,0,0" Text="Password Confirmation"
+                             Foreground="Gray" FontSize="30"/>
+                    <PasswordBox x:Name="SignUp_passconfirm_box" Grid.Row="2" Margin="20,0"
+                                 Opacity="0" GotFocus="passwordconfirm_box_gotfocus"
+                                 LostFocus="passwordconfirm_box_lostfocus"/>
+                    <TextBox x:Name="SignUp_phone_textbox" Grid.Row="3" Margin="20,0"
+                             BorderThickness="0,0,0,0" Text="Phone Number"
+                             InputScope="Number" Foreground="Gray" FontSize="30"
+                             GotFocus="SignUp_textbox_gotfocus" LostFocus="SignUp_textbox_lostfocus"/>
+                    <TextBox x:Name="SignUp_email_textbox" Grid.Row="4" Margin="20,0"
+                             BorderThickness="0,0,0,0" Text="Email" FontSize="30"
+                             Foreground="Gray" GotFocus="SignUp_textbox_gotfocus" LostFocus="SignUp_textbox_lostfocus"/>
+                    <TextBox x:Name="SignUp_country_textbox" Grid.Row="5" Margin="20,0"
+                             BorderThickness="0,0,0,0" Text="Country" FontSize="30"
+                             Foreground="Gray" GotFocus="SignUp_textbox_gotfocus" LostFocus="SignUp_textbox_lostfocus"/>
+
+
+
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,0">
+                        <RadioButton x:Name="female_radio_btn" Content=" Female"/>
+                        <RadioButton x:Name="male_radio_btn" Content="Male"/>
+                        <RadioButton x:Name="other_radio_btn" Content="Other"/>
+                    </StackPanel>
+                    <Button x:Name="SignUp_creatAcc_btn" Grid.Row="1" Margin="20,0"
+                            BorderThickness="0.7,0.7,0.7,0.7" Content="Submit" FontSize="30"
+                            BorderBrush="White" Click="Creat_an_account_click" FontWeight="Thin"/>
+                    <TextBlock  Grid.Row="2"  Margin="20,0"
+                                >
+                        <Run Text="      By clicking submit you agree " FontSize="25"/>
+                        <LineBreak/> 
+                        <Run FontSize="25" Text="       to the Terms and Condition" />
+                    </TextBlock>
+
+
+
+                </Grid>
+            </Grid>
+        </phone:PivotItem>
+
+        <phone:PivotItem x:Name="ForgotPass_pivotitem">
+            <Grid >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="forgot_email_textbox" Margin="20,0"
+                     BorderThickness="0,0,0,0" FontSize="30"
+                     Text="Email" Foreground="Gray" TextAlignment="Left" Height="100" GotFocus="SignUp_textbox_gotfocus"
+                             LostFocus="SignUp_textbox_lostfocus"/>
+                    <Button x:Name="Submit_forgot_mail" Grid.Row="1" Margin="20,20,20,0"
+                    BorderThickness="0.7,0.7,0.7,0.7" BorderBrush="White" Content="Submit" FontSize="35" Height="100"
+                    Click="submit_forgot_click" FontWeight="Thin"/>
+                </Grid>
+            </Grid>
+        </phone:PivotItem>
+    </phone:Pivot>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot">
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Background1.jpg"/>
-        </Grid.Background>
-        <phone:Pivot IsLocked="True" Name="mainPivot">
-            <phone:PivotItem>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="100" />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="SIGNIN" FontSize="50" HorizontalAlignment="Center" FontFamily="Segoe WP Black"/>
-                    <TextBox Name="userTbn" Height="70" Foreground="Gray" BorderThickness="0,0,0,1" Grid.Row="1"/>
-                    <TextBox Name="passTbn" Height="70" Foreground="Gray" BorderThickness="0,0,0,1" Grid.Row="2"/>
-                    <Grid Grid.Row="3" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <c4f:RoundButton Name="signBtn" Click="signBtn_Click" Grid.Column="0" ButtonHeight="100" ButtonWidth="100" Stretch="None" ImageSource="/Assets/next.png" />
-                        <c4f:RoundButton Name="signupBtn" Click="signupBtn_Click" Grid.Column="1" ButtonHeight="100" ButtonWidth="100" Stretch="None" ImageSource="/Assets/edit.png" />
-                    </Grid>
-                    
-                </Grid>
-            </phone:PivotItem>
-            <phone:PivotItem>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="SIGNUP" FontSize="50" FontFamily="Segoe WP Black" HorizontalAlignment="Center" />
-                </Grid>
-            </phone:PivotItem>
-        </phone:Pivot>
-    </Grid>
+
 
 </phone:PhoneApplicationPage>
