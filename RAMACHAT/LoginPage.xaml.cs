@@ -35,7 +35,11 @@ namespace RAMACHAT
                 App.client.setToken(resultObject.data.token);
                 App.client.USERID = resultObject.data._id;
                 App.connectView.TOKEN = resultObject.data.token ;
-                NavigationService.Navigate(new Uri("/MainPage.xaml?username=" + resultObject.data.username + "&token=" + resultObject.data.token + "&userid="+ resultObject.data._id, UriKind.Relative));
+                App._token = resultObject.data.token;
+                App._userid = resultObject.data._id;
+                App._username = resultObject.data.username;
+                //App._
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
         }
 

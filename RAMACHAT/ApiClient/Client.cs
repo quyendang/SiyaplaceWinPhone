@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RAMACHAT.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -58,10 +60,16 @@ namespace RAMACHAT.ApiClient
         {
             return await this.GetAsync(ApiLink.getAllUserLink());
         }
-        public async Task<string> getRoomMessagesByUserId(string id)
+        public async void getRoomMessagesByUserId(string id)
         {
             Debug.WriteLine(ApiLink.getRoomMessageByUserIdLink() + id);
-            return await GetAsync(ApiLink.getRoomMessageByUserIdLink() + id);
+            App.ViewModel.Items.Clear();
+            var result = await GetAsync(ApiLink.getRoomMessageByUserIdLink() + id);
+            MessageObject resultMessageObject = JsonConvert.DeserializeObject<MessageObject>(result);
+            foreach (var message in resultMessageObject.data)
+            {
+                App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(message._userId.avatar), CreateAt = message.createdAt, MessageText = message.message, SenderID = message._userId._id });
+            }
         }
         public async Task<string> getAllFriends()
         {
