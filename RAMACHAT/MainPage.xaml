@@ -116,6 +116,8 @@
             <ImageBrush ImageSource="/Assets/Background1.jpg"/>
         </Grid.Background>
         <phone:Panorama>
+          
+            
             <phone:PanoramaItem Header="friends">
                 <ListBox Name="friendList" SelectionChanged="ContactListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
