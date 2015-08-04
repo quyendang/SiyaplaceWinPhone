@@ -45,7 +45,7 @@
                      BorderThickness="0,0,0,0" 
                      TextAlignment="Left" FontSize="30" Text="Password"
                      Foreground="Gray" />
-                    <PasswordBox x:Name="password_box" Grid.Row="1" Margin="20,0"
+                    <PasswordBox x:Name="Password_box_signin" Grid.Row="1" Margin="20,0"
                          BorderThickness="0,0,0,0"
                           Opacity="0" GotFocus="password_gotfocus" 
                          LostFocus="password_lostfocus"/>
@@ -84,31 +84,31 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBox x:Name="SignUp_user_textbox" Grid.Row="0" Margin="20,0"
+                    <TextBox x:Name="UserTxt" Grid.Row="0" Margin="20,0"
                              BorderThickness="0,0,0,0" Text="User Name" 
                              Foreground="Gray" FontSize="30" GotFocus="SignUp_textbox_gotfocus"
                              LostFocus="SignUp_textbox_lostfocus"/>
-                    <TextBox x:Name="SignUp_pass_textbox" Grid.Row="1" Margin="20,0"
+                    <TextBox x:Name="PassTxt" Grid.Row="1" Margin="20,0"
                              BorderThickness="0,0,0,0" Text="Password"
                              Foreground="Gray" FontSize="30"/>
-                    <PasswordBox x:Name="SignUp_pass_box" Grid.Row="1" Margin="20,0"
+                    <PasswordBox x:Name="Pass_box" Grid.Row="1" Margin="20,0"
                                  Opacity="0" GotFocus="password_box_gotfocus"
                                  LostFocus="password_box_lostfocus"/>
 
-                    <TextBox x:Name="SignUp_passconfirm_textbox" Grid.Row="2" Margin="20,0"
+                    <TextBox x:Name="PassconfirmTxt" Grid.Row="2" Margin="20,0"
                              BorderThickness="0,0,0,0" Text="Password Confirmation"
                              Foreground="Gray" FontSize="30"/>
-                    <PasswordBox x:Name="SignUp_passconfirm_box" Grid.Row="2" Margin="20,0"
+                    <PasswordBox x:Name="Passconfirm_box" Grid.Row="2" Margin="20,0"
                                  Opacity="0" GotFocus="passwordconfirm_box_gotfocus"
                                  LostFocus="passwordconfirm_box_lostfocus"/>
-                    <TextBox x:Name="SignUp_phone_textbox" Grid.Row="3" Margin="20,0"
+                    <TextBox x:Name="PhoneTxt" Grid.Row="3" Margin="20,0"
                              BorderThickness="0,0,0,0" Text="Phone Number"
                              InputScope="Number" Foreground="Gray" FontSize="30"
                              GotFocus="SignUp_textbox_gotfocus" LostFocus="SignUp_textbox_lostfocus"/>
-                    <TextBox x:Name="SignUp_email_textbox" Grid.Row="4" Margin="20,0"
+                    <TextBox x:Name="EmailTxt" Grid.Row="4" Margin="20,0"
                              BorderThickness="0,0,0,0" Text="Email" FontSize="30"
                              Foreground="Gray" GotFocus="SignUp_textbox_gotfocus" LostFocus="SignUp_textbox_lostfocus"/>
-                    <TextBox x:Name="SignUp_country_textbox" Grid.Row="5" Margin="20,0"
+                    <TextBox x:Name="CountryTxt" Grid.Row="5" Margin="20,0"
                              BorderThickness="0,0,0,0" Text="Country" FontSize="30"
                              Foreground="Gray" GotFocus="SignUp_textbox_gotfocus" LostFocus="SignUp_textbox_lostfocus"/>
 
@@ -123,13 +123,13 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,0">
-                        <RadioButton x:Name="female_radio_btn" Content=" Female"/>
-                        <RadioButton x:Name="male_radio_btn" Content="Male"/>
+                        <RadioButton x:Name="female_radio_btn" Content=" Female" Checked="female_radio_btn_Checked"/>
+                        <RadioButton x:Name="male_radio_btn" Content="Male" Checked="male_radio_btn_Checked"/>
                         <RadioButton x:Name="other_radio_btn" Content="Other"/>
                     </StackPanel>
                     <Button x:Name="SignUp_creatAcc_btn" Grid.Row="1" Margin="20,0"
                             BorderThickness="0.7,0.7,0.7,0.7" Content="Submit" FontSize="30"
-                            BorderBrush="White" Click="Creat_an_account_click" FontWeight="Thin"/>
+                            BorderBrush="White" Click="Submit_click" FontWeight="Thin"/>
                     <TextBlock  Grid.Row="2"  Margin="20,0"
                                 >
                         <Run Text="      By clicking submit you agree " FontSize="25"/>

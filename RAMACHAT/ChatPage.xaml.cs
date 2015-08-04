@@ -23,6 +23,7 @@ namespace RAMACHAT
             DataContext = App.ViewModel;
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)
+
         {
                 try
                 {
@@ -55,6 +56,17 @@ namespace RAMACHAT
         private void ContactListBox_LayoutUpdated(object sender, EventArgs e)
         {
             this.ContactListBox.SelectedIndex = App.ViewModel.Items.Count - 1;
+        }
+
+        private void Send_btn_Click(object sender, RoutedEventArgs e)
+        {
+            JArray memberArray = new JArray();
+            memberArray.Add(App._userid);
+            memberArray.Add(App._reuserid);
+            App.connectView.sendMesS(App._userid, false, enter.Text, 1, App._username, memberArray, DateTime.Now.ToShortDateString());
+            enter.Text = "";
+            ContactListBox.SelectedIndex = App.ViewModel.Items.Count() - 1;
+            ContactListBox.Focus();
         }
     }
 }

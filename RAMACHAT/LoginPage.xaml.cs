@@ -15,16 +15,19 @@ using System.ComponentModel;
 using System.Windows.Media;
 using RAMACHAT.Helper;
 using System.IO.IsolatedStorage;
+using System.Threading;
 
 namespace RAMACHAT
 {
     public partial class LoginPage : PhoneApplicationPage
     {
+        private int sex;
         private bool signUp = false;
         public LoginPage()
         {
             InitializeComponent();
-           
+            user_name_textbox.Text = "a@a.com";
+            
         }
 
         //protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -78,7 +81,7 @@ namespace RAMACHAT
 
         private async void signBtn_Click(object sender, RoutedEventArgs e)
         {
-            SignUpForm user = new SignUpForm() {  username = user_name_textbox.Text, password = password_box.Password };
+            SignUpForm user = new SignUpForm() {  username = user_name_textbox.Text, password = Password_box_signin.Password };
             string jsonString = JsonConvert.SerializeObject(user);
             string result = await App.client.Login( jsonString.ToString());
             Debug.WriteLine(result);
@@ -148,20 +151,21 @@ namespace RAMACHAT
 
         private void password_gotfocus(object sender, RoutedEventArgs e)
         {
-            password_box.Opacity = 1;
+            //password_box.Opacity = 1;
+            Password_box_signin.Opacity = 1;
             password_textbox.Text = "";
         }
 
         private void password_lostfocus(object sender, RoutedEventArgs e)
         {
-            if (password_box.Password != "")
+            if (Password_box_signin.Password != "")
             {
 
             }
             else
             {
                 password_textbox.Text = "Password";
-                password_box.Opacity = 0;
+                Password_box_signin.Opacity = 0;
             }
         }
 
@@ -170,41 +174,41 @@ namespace RAMACHAT
             TextBox TB = sender as TextBox;
             switch (TB.Name)
             {
-                case "SignUp_user_textbox":
+                case "UserTxt":
                     {
-                        if (SignUp_user_textbox.Text == "User Name")
+                        if (UserTxt.Text == "User Name")
                         {
-                            SignUp_user_textbox.Text = "";
-                            SignUp_user_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            UserTxt.Text = "";
+                            UserTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
                         else { }
                     }
                     break;
-                case "SignUp_phone_textbox":
+                case "PhoneTxt":
                     {
-                        if (SignUp_phone_textbox.Text == "Phone Number")
+                        if (PhoneTxt.Text == "Phone Number")
                         {
-                            SignUp_phone_textbox.Text = "";
-                            SignUp_phone_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            PhoneTxt.Text = "";
+                            PhoneTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
                     }
                     break;
-                case "SignUp_email_textbox":
+                case "EmailTxt":
                     {
-                        if (SignUp_email_textbox.Text == "Email")
+                        if (EmailTxt.Text == "Email")
                         {
-                            SignUp_email_textbox.Text = "";
-                            SignUp_email_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            EmailTxt.Text = "";
+                            EmailTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
 
                     }
                     break;
-                case "SignUp_country_textbox":
+                case "CountryTxt":
                     {
-                        if (SignUp_country_textbox.Text == "Country")
+                        if (CountryTxt.Text == "Country")
                         {
-                            SignUp_country_textbox.Text = "";
-                            SignUp_country_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            CountryTxt.Text = "";
+                            CountryTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
                     }
                     break;
@@ -226,55 +230,55 @@ namespace RAMACHAT
             TextBox TB = sender as TextBox;
             switch (TB.Name)
             {
-                case "SignUp_user_textbox":
+                case "UserTxt":
                     {
-                        if (SignUp_user_textbox.Text != "")
+                        if (UserTxt.Text != "")
                         {
                             user_name_textbox.Foreground = new SolidColorBrush(Colors.Black);
                         }
                         else
                         {
-                            SignUp_user_textbox.Text = "User Name";
-                            SignUp_user_textbox.Foreground = new SolidColorBrush(Colors.Gray);
+                            UserTxt.Text = "User Name";
+                            UserTxt.Foreground = new SolidColorBrush(Colors.Gray);
                         }
                     }
                     break;
 
-                case "SignUp_phone_textbox":
+                case "PhoneTxt":
                     {
-                        if (SignUp_phone_textbox.Text != "")
+                        if (PhoneTxt.Text != "")
                         {
-                            SignUp_phone_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            PhoneTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
                         else
                         {
-                            SignUp_phone_textbox.Text = "Phone Number";
-                            SignUp_phone_textbox.Foreground = new SolidColorBrush(Colors.Gray);
+                            PhoneTxt.Text = "Phone Number";
+                            PhoneTxt.Foreground = new SolidColorBrush(Colors.Gray);
                         }
                     }
                     break;
-                case "SignUp_email_textbox":
+                case "EmailTxt":
                     {
-                        if (SignUp_email_textbox.Text != "")
+                        if (EmailTxt.Text != "")
                         {
-                            SignUp_email_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            EmailTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
                         else
                         {
-                            SignUp_email_textbox.Text = "Email";
-                            SignUp_email_textbox.Foreground = new SolidColorBrush(Colors.Gray);
+                            EmailTxt.Text = "Email";
+                            EmailTxt.Foreground = new SolidColorBrush(Colors.Gray);
                         }
                     } break;
-                case "SignUp_country_textbox":
+                case "CountryTxt":
                     {
-                        if (SignUp_country_textbox.Text != "")
+                        if (CountryTxt.Text != "")
                         {
-                            SignUp_country_textbox.Foreground = new SolidColorBrush(Colors.Black);
+                            CountryTxt.Foreground = new SolidColorBrush(Colors.Black);
                         }
                         else
                         {
-                            SignUp_country_textbox.Text = "Country";
-                            SignUp_country_textbox.Foreground = new SolidColorBrush(Colors.Gray);
+                            CountryTxt.Text = "Country";
+                            CountryTxt.Foreground = new SolidColorBrush(Colors.Gray);
                         }
                     } break;
                 case "forgot_email_textbox":
@@ -294,46 +298,96 @@ namespace RAMACHAT
 
         private void password_box_gotfocus(object sender, RoutedEventArgs e)
         {
-            SignUp_pass_box.Opacity = 1;
-            SignUp_pass_textbox.Text = "";
+            Pass_box.Opacity = 1;
+            PassTxt.Text = "";
         }
 
         private void password_box_lostfocus(object sender, RoutedEventArgs e)
         {
-            if (SignUp_pass_box.Password != "")
+            if (Pass_box.Password != "")
             { }
             else
             {
-                SignUp_pass_textbox.Text = "Password";
-                SignUp_pass_box.Opacity = 0;
+                PassTxt.Text = "Password";
+                Pass_box.Opacity = 0;
             }
         }
 
         private void passwordconfirm_box_gotfocus(object sender, RoutedEventArgs e)
         {
-            SignUp_passconfirm_box.Opacity = 1;
-            SignUp_passconfirm_textbox.Text = "";
+            Passconfirm_box.Opacity = 1;
+            PassconfirmTxt.Text = "";
         }
 
         private void passwordconfirm_box_lostfocus(object sender, RoutedEventArgs e)
         {
-            if (SignUp_passconfirm_box.Password != "")
+            if (Passconfirm_box.Password != "")
             { }
             else
             {
-                SignUp_passconfirm_box.Opacity = 0;
-                SignUp_passconfirm_textbox.Text = "Password Confirmation";
+                Passconfirm_box.Opacity = 0;
+                PassconfirmTxt.Text = "Password Confirmation";
             }
         }
 
-        private void Creat_an_account_click(object sender, RoutedEventArgs e)
+        private async void Submit_click(object sender, RoutedEventArgs e)
         {
+            bool result;
 
+            if (Pass_box.Password != "" && EmailTxt.Text != "" && Pass_box.Password == Passconfirm_box.Password && UserTxt.Text.Length>=3)
+            
+
+                {
+                    SignUpForm user = new SignUpForm() { username = UserTxt.Text, password = Pass_box.Password, country = CountryTxt.Text, email = EmailTxt.Text, phone = PhoneTxt.Text, gender = sex };
+                    string jsonString = JsonConvert.SerializeObject(user);
+                    //result = await App.client.SignUp(jsonString);
+                    result = await App.client.SignUp(jsonString);
+                    if (result)
+                    {
+                        //Message_Ts.Message = "OK!";
+                        MessageBox.Show("You have signup an accout");
+                        Thread.Sleep(2000);
+                        //NavigationService.Navigate(new Uri("/LoginPage.xaml?username=" + EmailTxt.Text + "&password=" + passTxt.Password, UriKind.Relative));
+                        main_pivot.IsLocked = false;
+                        main_pivot.SelectedItem = SignIn_pivotitem;
+                        user_name_textbox.Text = EmailTxt.Text;
+                        Password_box_signin.Password = Pass_box.Password;
+                        main_pivot.IsLocked = true;
+                    }
+                }
+            else
+                if (!EmailTxt.Text.Contains("@"))
+                {
+                    //Message_Ts.Message = "Email incorect!";
+                    MessageBox.Show("Email incorect");
+                }
+            else
+                    if (Pass_box.Password != Passconfirm_box.Password)
+                    {
+                        MessageBox.Show("Password and Password confirm must be the Same");
+                    }
+                else if (UserTxt.Text.Length < 3) { MessageBox.Show("Username must be 3 - 32 characters"); }
+                    else MessageBox.Show("Username & Password is require"); 
+
+            }
+            
+        
+
+        private async void submit_forgot_click(object sender, RoutedEventArgs e)
+        {
+            
+            
+           
         }
 
-        private void submit_forgot_click(object sender, RoutedEventArgs e)
+        private void female_radio_btn_Checked(object sender, RoutedEventArgs e)
         {
+            sex = 2;
+        }
 
+        private void male_radio_btn_Checked(object sender, RoutedEventArgs e)
+        {
+            sex = 1;
         }
     }
 }

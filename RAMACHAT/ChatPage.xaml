@@ -129,7 +129,8 @@
             </Grid.RowDefinitions>
             <ListBox Grid.Row="0" x:Name="ContactListBox" LayoutUpdated="ContactListBox_LayoutUpdated"
                      ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
-            <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
+            <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown" Margin="6,0,100,0"/>
+            <Button x:Name="Send_btn" Content="Send" HorizontalAlignment="Right" Margin="0" Grid.Row="1" VerticalAlignment="Top" Height="70" Width="100" Click="Send_btn_Click"/>
         </Grid>
     </Grid>
 

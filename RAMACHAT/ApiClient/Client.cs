@@ -79,5 +79,17 @@ namespace RAMACHAT.ApiClient
         {
             httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
         }
+        public async Task<bool> SignUp(string data)
+        {
+            string result = await this.PostAsync(ApiLink.getSignUpLink(), data.ToString());
+            if (result.Contains("Successfully"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
