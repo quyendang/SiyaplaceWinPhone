@@ -11,6 +11,8 @@ using Newtonsoft.Json.Linq;
 using System.Windows.Input;
 using Newtonsoft.Json;
 using RAMACHAT.Model;
+using System.Diagnostics;
+using System.Windows.Media.Imaging;
 
 namespace RAMACHAT
 {
@@ -23,16 +25,14 @@ namespace RAMACHAT
             DataContext = App.ViewModel;
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)
-
         {
                 try
                 {
                     string userInfo = await App.client.getUserById(App._reuserid);
                     FriendInfo userObject = JsonConvert.DeserializeObject<FriendInfo>(userInfo);
-                    people.Text = userObject.data.username.ToString();
-                    //App.ViewModel.Items.Clear();
+                    UserName.Text = userObject.data.username;
+                    avatar.ImageSource = new BitmapImage(new Uri(userObject.data.avatar, UriKind.RelativeOrAbsolute));
                     App.client.getRoomMessagesByUserId(App._reuserid);
-                    
                 }
             catch
                 { }
@@ -56,17 +56,6 @@ namespace RAMACHAT
         private void ContactListBox_LayoutUpdated(object sender, EventArgs e)
         {
             this.ContactListBox.SelectedIndex = App.ViewModel.Items.Count - 1;
-        }
-
-        private void Send_btn_Click(object sender, RoutedEventArgs e)
-        {
-            JArray memberArray = new JArray();
-            memberArray.Add(App._userid);
-            memberArray.Add(App._reuserid);
-            App.connectView.sendMesS(App._userid, false, enter.Text, 1, App._username, memberArray, DateTime.Now.ToShortDateString());
-            enter.Text = "";
-            ContactListBox.SelectedIndex = App.ViewModel.Items.Count() - 1;
-            ContactListBox.Focus();
         }
     }
 }

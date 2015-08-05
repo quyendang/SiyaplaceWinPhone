@@ -10,9 +10,10 @@
     xmlns:helper="clr-namespace:RAMACHAT.Helper"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="False" Foreground="Black" Background="#FF008F41">
+    shell:SystemTray.IsVisible="False">
     <phone:PhoneApplicationPage.Resources>
         <helper:ObjectToInt x:Key="ObjectToInt"/>
         <DataTemplate x:Key="ImageOnLeftItemTemplate">
@@ -117,8 +118,21 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Name="people" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="#FF6A6A6A" FontSize="36"/>
+        <StackPanel Height="100" Grid.Row="0">
+            <Grid Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse Grid.Column="0" Stroke="Transparent" StrokeThickness="1"  Margin="0" Height="100" Width="100" >
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="avatar" AlignmentX="Center" AlignmentY="Center" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Name="UserName" Text="aaaaaaaaaaaa" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Image/>
+            </Grid>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -129,8 +143,7 @@
             </Grid.RowDefinitions>
             <ListBox Grid.Row="0" x:Name="ContactListBox" LayoutUpdated="ContactListBox_LayoutUpdated"
                      ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
-            <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown" Margin="6,0,100,0"/>
-            <Button x:Name="Send_btn" Content="Send" HorizontalAlignment="Right" Margin="0" Grid.Row="1" VerticalAlignment="Top" Height="70" Width="100" Click="Send_btn_Click"/>
+            <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
         </Grid>
     </Grid>
 
