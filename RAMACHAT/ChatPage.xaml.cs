@@ -49,7 +49,7 @@ namespace RAMACHAT
                 JArray memberArray = new JArray();
                 memberArray.Add(App._userid);
                 memberArray.Add(App._reuserid);
-                App.connectView.sendMesS(App._userid, false, enter.Text, 1, App._username, memberArray, DateTime.Now.ToShortDateString());
+                App.connectView.sendMesS(App._userid, false, enter.Text, 1, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
                 enter.Text = "";
                 ContactListBox.SelectedIndex = App.ViewModel.Items.Count() - 1;
                 ContactListBox.Focus();
@@ -81,7 +81,7 @@ namespace RAMACHAT
                    JArray memberArray = new JArray();
                    memberArray.Add(App._userid);
                    memberArray.Add(App._reuserid);
-                   App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, DateTime.Now.ToShortDateString());
+                   App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
                }
             }
         }
