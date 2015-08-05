@@ -3,6 +3,7 @@ using RAMACHAT.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -35,6 +36,24 @@ namespace RAMACHAT.ApiClient
             string content = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(content);
             return content;
+        }
+        public async Task<string> PostImage(string fileName, MemoryStream photoStream)
+        {
+            var httpClient = new HttpClient();
+            if (this.TOKEN != null)
+            {
+                addHeader(httpClient, this.TOKEN);
+            }{ }
+            photoStream.Position = 0;
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent(DateTime.Now.ToString()), "temporaryName");
+            content.Add(new StringContent("1"), "type");
+            content.Add(new StreamContent(photoStream), "file", fileName);
+            var response = await httpClient.PostAsync("http://128.199.113.218:3000/files/uploadImage", content);
+            response.EnsureSuccessStatusCode();
+            string contents = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(contents);
+            return contents;
         }
         public async Task<string> GetAsync(string uri)
         {

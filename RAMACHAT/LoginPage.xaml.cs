@@ -83,7 +83,7 @@ namespace RAMACHAT
         {
             SignUpForm user = new SignUpForm() {  username = user_name_textbox.Text, password = Password_box_signin.Password };
             string jsonString = JsonConvert.SerializeObject(user);
-            string result = await App.client.Login( jsonString.ToString());
+            string result = await App.client.Login(jsonString.ToString());
             Debug.WriteLine(result);
             LoginResponse resultObject = JsonConvert.DeserializeObject<LoginResponse>(result);
             if(resultObject.data.token != null)
@@ -373,7 +373,7 @@ namespace RAMACHAT
             
         
 
-        private async void submit_forgot_click(object sender, RoutedEventArgs e)
+        private void submit_forgot_click(object sender, RoutedEventArgs e)
         {
             
             

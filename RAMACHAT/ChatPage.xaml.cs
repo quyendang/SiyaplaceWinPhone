@@ -13,12 +13,15 @@ using Newtonsoft.Json;
 using RAMACHAT.Model;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
+using Microsoft.Phone.Tasks;
+using System.IO;
 
 namespace RAMACHAT
 {
     public partial class ChatPage : PhoneApplicationPage
     {
         public string _reuserid = "";
+        public PhotoChooserTask photoChooserTask;
         public ChatPage()
         {
             InitializeComponent();
@@ -56,6 +59,24 @@ namespace RAMACHAT
         private void ContactListBox_LayoutUpdated(object sender, EventArgs e)
         {
             this.ContactListBox.SelectedIndex = App.ViewModel.Items.Count - 1;
+        }
+
+        private void imageChatBtn_Click(object sender, EventArgs e)
+        {
+            photoChooserTask = new PhotoChooserTask();
+            photoChooserTask.Completed += new EventHandler<PhotoResult>(photoChooserTask_Completed);
+            photoChooserTask.Show();
+        }
+        public async void photoChooserTask_Completed(object sender, PhotoResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+               MemoryStream photoStream;
+               photoStream = new MemoryStream();
+               e.ChosenPhoto.CopyTo(photoStream);
+               string result = await App.client.PostImage(e.OriginalFileName, photoStream);
+               MessageBox.Show(result);
+            }
         }
     }
 }

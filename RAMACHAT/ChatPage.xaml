@@ -146,5 +146,9 @@
             <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
         </Grid>
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBarIconButton x:Name="imageChatBtn" IconUri="/Images/appbar_button1.png" Text="Image" Click="imageChatBtn_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
