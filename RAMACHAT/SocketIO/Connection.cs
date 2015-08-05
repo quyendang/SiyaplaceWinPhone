@@ -78,16 +78,16 @@ namespace RAMACHAT.SocketIO
                         mSocket.On(Constant.SOCKET_EVENT_LEAVE, onLeaveRoom);
                         mSocket.On(Constant.SOCKET_EVENT_CHANGE_ROOM_TITLE, onChangeRoomTitle);
                         mSocket.On(Constant.SOCKET_EVENT_CHAT, (data) => {
-                           // Debug.WriteLine(data.ToString());
+                            Debug.WriteLine(data.ToString());
                             Dispatcher dispatcher = Deployment.Current.Dispatcher;
                             dispatcher.BeginInvoke(() =>
                             {
                                 String result = data.ToString();
                                 ChatResponse resultObject = JsonConvert.DeserializeObject<ChatResponse>(result);
-                                Debug.WriteLine(resultObject.data.message);
-                                Debug.WriteLine(resultObject.data.avatar);
-                                App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.senderId, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message, Avatar = new Uri(resultObject.data.avatar) });
-                                if(resultObject.data.senderId != App._userid)
+                                //Debug.WriteLine(resultObject.data.message);
+                               // Debug.WriteLine(resultObject.data.sender.avatar);
+                                App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.sender._id, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message.message, Avatar = new Uri(resultObject.data.sender.avatar) });
+                                if(resultObject.data.sender._id != App._userid)
                                 {
                                     //try
                                     //{
@@ -107,11 +107,11 @@ namespace RAMACHAT.SocketIO
 
                                     FrameworkDispatcher.Update();
                                     soundInstance.Play();
-                                    App._reuserid = resultObject.data.senderId;
+                                    App._reuserid = resultObject.data.sender._id;
                                     ToastPrompt tost = new ToastPrompt()
                                     {
-                                        Title = resultObject.data.senderName,
-                                        Message = resultObject.data.message,
+                                        Title = resultObject.data.sender.username,
+                                        Message = resultObject.data.message.message,
                                     };
                                     tost.Tap += tosk_Tap;
                                     tost.Show();

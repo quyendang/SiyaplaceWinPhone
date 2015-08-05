@@ -75,7 +75,14 @@ namespace RAMACHAT
                photoStream = new MemoryStream();
                e.ChosenPhoto.CopyTo(photoStream);
                string result = await App.client.PostImage(e.OriginalFileName, photoStream);
-               MessageBox.Show(result);
+               UploadImageResponse resultObject = JsonConvert.DeserializeObject<UploadImageResponse>(result);
+               if(resultObject.data._id !=null)
+               {
+                   JArray memberArray = new JArray();
+                   memberArray.Add(App._userid);
+                   memberArray.Add(App._reuserid);
+                   App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, DateTime.Now.ToShortDateString());
+               }
             }
         }
     }
