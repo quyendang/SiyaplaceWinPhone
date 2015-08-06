@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,21 +41,27 @@ namespace RAMACHAT.ApiClient
         public async Task<string> PostImage(string fileName, MemoryStream photoStream)
         {
             var httpClient = new HttpClient();
+            string boundary = "-------------" + Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond);
+            //httpClient.DefaultRequestHeaders.Add("Content-Type", "multipart/form-data; boundary=" + boundary);
             if (this.TOKEN != null)
             {
                 addHeader(httpClient, this.TOKEN);
             }{ }
             photoStream.Position = 0;
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent(DateTime.Now.ToString()), "temporaryName");
-            content.Add(new StringContent("1"), "type");
-            content.Add(new StreamContent(photoStream), "file", fileName);
-            var response = await httpClient.PostAsync("http://128.199.113.218:3000/files/uploadImage", content);
+            //content.Add(new StringContent(Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond)), "temporaryName");
+            //content.Add(new StringContent("mimetype"), "image/jpg");
+            //content.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+            StreamContent photoupload = new StreamContent(photoStream);
+            photoupload.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+            content.Add(photoupload, "file", fileName);
+            var response = await httpClient.PostAsync("http://128.199.113.218:3000/files/uploadFile", content);
             response.EnsureSuccessStatusCode();
             string contents = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(contents);
             return contents;
         }
+        
         public async Task<string> GetAsync(string uri)
         {
             var httpClient = new HttpClient();
@@ -81,13 +88,23 @@ namespace RAMACHAT.ApiClient
         }
         public async void getRoomMessagesByUserId(string id)
         {
-            Debug.WriteLine(ApiLink.getRoomMessageByUserIdLink() + id);
+           // Debug.WriteLine(ApiLink.getRoomMessageByUserIdLink() + id);
             App.ViewModel.Items.Clear();
             var result = await GetAsync(ApiLink.getRoomMessageByUserIdLink() + id);
+            Debug.WriteLine(result);
             MessageObject resultMessageObject = JsonConvert.DeserializeObject<MessageObject>(result);
             foreach (var message in resultMessageObject.data)
             {
-                App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(message._userId.avatar), CreateAt = message.createdAt, MessageText = message.message, SenderID = message._userId._id });
+                if(message.type == 1)
+                {
+                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(message._userId.avatar), CreateAt = message.createdAt, MessageText = message.message, SenderID = message._userId._id, Type = message.type });
+                }
+                else
+                {
+                    if (message.file.thumbnail != null)
+                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(message._userId.avatar), CreateAt = message.createdAt, SenderID = message._userId._id, Type = message.type, thumbnail = new Uri(message.file.thumbnail, UriKind.RelativeOrAbsolute) });
+                }
+                
             }
         }
         public async Task<string> getAllFriends()

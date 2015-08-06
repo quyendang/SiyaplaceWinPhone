@@ -22,7 +22,7 @@ namespace RAMACHAT
     public partial class LoginPage : PhoneApplicationPage
     {
         private int sex;
-        private bool signUp = false;
+        
         public LoginPage()
         {
             InitializeComponent();

@@ -12,6 +12,38 @@ namespace RAMACHAT.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
+        private int _type;
+        public int Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                if(value!= _type)
+                {
+                    _type = value;
+                    NotifyPropertyChanged("Type");
+                }
+            }
+        }
+        private Uri thub;
+        public Uri thumbnail
+        {
+            get
+            {
+                return thub;
+            }
+            set
+            {
+                if (value != thub)
+                {
+                    thub = value;
+                    NotifyPropertyChanged("thumbnail");
+                }
+            }
+        }
         private string _messageText;
         public string MessageText
         {

@@ -22,6 +22,7 @@ namespace RAMACHAT
     {
         public string _reuserid = "";
         public PhotoChooserTask photoChooserTask;
+        public CameraCaptureTask cameraTask;
         public ChatPage()
         {
             InitializeComponent();
@@ -83,6 +84,32 @@ namespace RAMACHAT
                    memberArray.Add(App._reuserid);
                    App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
                }
+            }
+        }
+
+        private void cameraBtn_Click(object sender, EventArgs e)
+        {
+            cameraTask = new CameraCaptureTask();
+            cameraTask.Completed += cameraTask_Completed;
+            cameraTask.Show();
+        }
+
+        public async void cameraTask_Completed(object sender, PhotoResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                MemoryStream photoStream;
+                photoStream = new MemoryStream();
+                e.ChosenPhoto.CopyTo(photoStream);
+                string result = await App.client.PostImage(e.OriginalFileName, photoStream);
+                UploadImageResponse resultObject = JsonConvert.DeserializeObject<UploadImageResponse>(result);
+                if (resultObject.data._id != null)
+                {
+                    JArray memberArray = new JArray();
+                    memberArray.Add(App._userid);
+                    memberArray.Add(App._reuserid);
+                    App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
+                }
             }
         }
     }

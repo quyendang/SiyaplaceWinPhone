@@ -60,6 +60,39 @@
 
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="LeftPic">
+            <Grid HorizontalAlignment="Left"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="9" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Ellipse Grid.Row="0"  Margin="0,5,5,0" Height="50" Width="50" Stroke="White" StrokeThickness="2" HorizontalAlignment="Left">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Avatar}" AlignmentX="Center" AlignmentY="Center" />
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Path Data="M24.333334,197.66667 L24.333334,407.83368 L39.333668,407.83368" Grid.Row="1"
+												Fill="#FF319A31" HorizontalAlignment="Left"
+												Height="8.834" Stretch="Fill" 
+												StrokeThickness="1" UseLayoutRounding="False" Width="16" 
+												Margin="20,0,0,0"
+												VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                </Path>
+                <Border Background="#FF319A31" MinHeight="55" 
+												Margin="5,0,50,0" Grid.Row="2"
+											Name="rectangle3" VerticalAlignment="Top"
+										 HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Image Source="{Binding thumbnail}"/>
+                    </Grid>
+                </Border>
+
+
+
+            </Grid>
+        </DataTemplate>
         <DataTemplate x:Key="ImageOnRightItemTemplate">
             <Grid HorizontalAlignment="Right" Width="450" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
@@ -103,10 +136,40 @@
 
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="RightPic">
+            <Grid HorizontalAlignment="Right" Width="450" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="19" />
+                </Grid.RowDefinitions>
+                <Border Grid.Column="1" Background="#FF6EA603" MinHeight="55" 
+												Margin="50,5,10,0" 
+											Name="rectangle3" VerticalAlignment="Top"
+										 HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Image Source="{Binding thumbnail}"/>
+                    </Grid>
+                </Border>
+
+                <Path Grid.Column="1" Data="M24.333334,197.66667 L24.333334,407.83368 L39.333668,407.83368" Grid.Row="1"
+												Fill="#FF6EA603" HorizontalAlignment="Right" Height="8.834" Stretch="Fill" 
+												StrokeThickness="1" UseLayoutRounding="False" Width="16" Margin="0,0,20,10.333"
+												VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <CompositeTransform Rotation="-179.813"/>
+                    </Path.RenderTransform>
+                </Path>
+
+            </Grid>
+        </DataTemplate>
         <DataTemplate x:Key="SelectingTemplate">
             <local:ContactTemplateSelector Content="{Binding}"
                                     ImageLeft="{StaticResource ImageOnLeftItemTemplate}"
-                                    ImageRight="{StaticResource ImageOnRightItemTemplate}"
+                                    ImageRight="{StaticResource ImageOnRightItemTemplate}" PicLeft="{StaticResource LeftPic}" PicRight="{StaticResource RightPic}"
                                     HorizontalContentAlignment="Stretch" />
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -149,6 +212,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton x:Name="imageChatBtn" IconUri="/Images/appbar_button1.png" Text="Image" Click="imageChatBtn_Click"/>
+            <shell:ApplicationBarIconButton x:Name="cameraBtn" IconUri="/Images/appbar_button1.png" Text="Camera" Click="cameraBtn_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

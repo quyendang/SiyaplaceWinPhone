@@ -84,23 +84,17 @@ namespace RAMACHAT.SocketIO
                             {
                                 String result = data.ToString();
                                 ChatResponse resultObject = JsonConvert.DeserializeObject<ChatResponse>(result);
-                                //Debug.WriteLine(resultObject.data.message);
-                               // Debug.WriteLine(resultObject.data.sender.avatar);
-                                App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.sender._id, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message.message, Avatar = new Uri(resultObject.data.sender.avatar) });
+                                if(resultObject.data.message.type == 2)
+                                {
+                                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.sender._id, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message.message, Avatar = new Uri(resultObject.data.sender.avatar), Type = resultObject.data.message.type, thumbnail = new Uri(resultObject.data.message.file.thumbnail, UriKind.RelativeOrAbsolute) });
+                                }
+                                else
+                                {
+                                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { SenderID = resultObject.data.sender._id, CreateAt = resultObject.data.sequence, MessageText = resultObject.data.message.message, Avatar = new Uri(resultObject.data.sender.avatar), Type = resultObject.data.message.type });
+                                }
+                                
                                 if(resultObject.data.sender._id != App._userid)
                                 {
-                                    //try
-                                    //{
-                                    //    Dispatcher eld = Deployment.Current.Dispatcher;
-                                    //    eld.BeginInvoke(() =>
-                                    //    {
-                                    //        Song s = Song.FromUri("el", new Uri(@"Assets/Audio/recieve.wav", UriKind.RelativeOrAbsolute));
-                                    //        MediaPlayer.IsRepeating = false;
-                                    //        MediaPlayer.Play(s);
-                                    //    });
-                                    //}
-                                    //catch(Exception)
-                                    //{ }
                                     var stream = Application.GetResourceStream(new Uri(@"Assets/Audio/recieve.wav", UriKind.RelativeOrAbsolute));
                                     var effect = SoundEffect.FromStream(stream.Stream);
                                     var soundInstance = effect.CreateInstance();

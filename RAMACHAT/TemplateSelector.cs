@@ -33,18 +33,43 @@ namespace RAMACHAT
             get;
             set;
         }
-
+        public DataTemplate PicLeft
+        {
+            get;
+            set;
+        }
+        public DataTemplate PicRight
+        {
+            get;
+            set;
+        }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var i = item as ItemViewModel;
             if (i.SenderID == App.client.USERID)
             {
-                return ImageRight;
+                if(i.Type ==1)
+                {
+                    return ImageRight;
+                }
+                else
+                {
+                    return PicLeft;
+                }
+                
             }
             else
             {
-                return ImageLeft;
+                if(i.Type == 1)
+                {
+                    return ImageLeft;
+                }
+                else
+                {
+
+                    return PicRight;
+                }
             }
         }
     }

@@ -22,6 +22,18 @@ namespace RAMACHAT.Model
         public string createdAt { get; set; }
         public int type { get; set; }
         public int __v { get; set; }
+        public Files file { get; set; }
+    }
+    public class Files
+    {
+        public string _id { get; set; }
+        public string name { get; set; }
+        public string originalName { get; set; }
+        public string extension { get; set; }
+        public int size { get; set; }
+        public int type { get; set; }
+        public string createdAt { get; set; }
+        public string thumbnail { get; set; }
     }
     public class UserId
     {
