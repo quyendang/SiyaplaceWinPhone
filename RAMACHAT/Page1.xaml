@@ -14,37 +14,27 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid HorizontalAlignment="Left"  >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <RowDefinition Height="9" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Ellipse Grid.Row="0"  Margin="0,5,5,0" Height="50" Width="50" Stroke="White" StrokeThickness="2" HorizontalAlignment="Left">
+    <Grid Height="100" x:Name="LayoutRoot" Background="Transparent">
+        <Grid HorizontalAlignment="Left" Margin="0,5,0,0"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Ellipse Grid.Column="0" Stroke="White" StrokeThickness="1"  Margin="0" Height="70" Width="70" >
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding Avatar}" AlignmentX="Center" AlignmentY="Center" />
+                    <ImageBrush ImageSource="/Assets/room.png" AlignmentX="Center" AlignmentY="Center" />
                 </Ellipse.Fill>
             </Ellipse>
-
-            <Path Data="M24.333334,197.66667 L24.333334,407.83368 L39.333668,407.83368" Grid.Row="1"
-												Fill="#FF319A31" HorizontalAlignment="Left"
-												Height="8.834" Stretch="Fill" 
-												StrokeThickness="1" UseLayoutRounding="False" Width="16" 
-												Margin="20,0,0,0"
-												VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
-            </Path>
-            <Border Background="#FF319A31" MinHeight="55" 
-												Margin="5,0,50,0" Grid.Row="2"
-											Name="rectangle3" VerticalAlignment="Top"
-										 HorizontalAlignment="Stretch">
-                <Grid>
-                    <Image Source="{Binding thumbnail}"/>
-                </Grid>
-            </Border>
-
-
-
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="10,0,0,0" FontSize="30" Text="{Binding data.updatedAt}" Grid.Row="0" VerticalAlignment="Center" />
+                <TextBlock Margin="10,0,0,0" FontSize="30" Text="{Binding data.lastMessage.message}" Grid.Row="1" VerticalAlignment="Center" />
+            </Grid>
+            
+            
         </Grid>
     </Grid>
 

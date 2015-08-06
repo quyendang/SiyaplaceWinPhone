@@ -133,5 +133,10 @@ namespace RAMACHAT.ApiClient
                 return false;
             }
         }
+        public async Task<string> getChatHistory()
+        {
+            string result = await this.GetAsync(ApiLink.getChatHistoryLink());
+            return result;
+        }
     }
 }

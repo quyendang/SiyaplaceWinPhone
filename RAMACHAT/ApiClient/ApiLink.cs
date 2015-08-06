@@ -58,5 +58,9 @@ namespace RAMACHAT.ApiClient
         {
             return HOSTNAME + "/files/uploadFile";
         }
+        public static string getChatHistoryLink()
+        {
+            return HOSTNAME + "/users/getChatHistory";
+        }
     }
 }

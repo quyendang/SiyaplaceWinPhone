@@ -40,8 +40,11 @@ namespace RAMACHAT
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             string result = await App.client.getAllFriends();
+            string resultHistory = await App.client.getChatHistory();
             resultObject = JsonConvert.DeserializeObject<GetFriendResponse>(result);
+            var resultHistoryObject = JsonConvert.DeserializeObject<HistoryResponse>(resultHistory);
             friendList.ItemsSource = resultObject.data;
+            recent.ItemsSource = resultHistoryObject.data;
         }
 
         

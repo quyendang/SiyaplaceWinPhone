@@ -140,15 +140,33 @@
                 </ListBox>
             </phone:PanoramaItem>
             <phone:PanoramaItem Header="Recent">
-                
-                <!--<Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="90"/>
-                    </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0" x:Name="ContactListBox" SelectedIndex="{Binding Items,Converter={StaticResource  ObjectToInt}}" ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
-                    <TextBox Grid.Row="1" Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
-                </Grid>-->
+                <ListBox Name="recent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Left" Margin="0,5,0,0"  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0" Stroke="White" StrokeThickness="1"  Margin="0" Height="70" Width="70" >
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="/Assets/room.png" AlignmentX="Center" AlignmentY="Center" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Margin="10,0,0,0" FontSize="30" Text="{Binding updatedAt}" Grid.Row="0" VerticalAlignment="Center" />
+                                    <TextBlock Margin="10,0,0,0" FontSize="16" Foreground="Orange" Text="{Binding lastMessage.message}" Grid.Row="1" VerticalAlignment="Center" />
+                                </Grid>
+
+
+                            </Grid> 
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </phone:PanoramaItem>
         </phone:Panorama>
         

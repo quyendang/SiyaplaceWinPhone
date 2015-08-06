@@ -110,6 +110,7 @@
     <Compile Include="Model\ChatResponse.cs" />
     <Compile Include="Model\FileBody.cs" />
     <Compile Include="Model\GetFriendResponse.cs" />
+    <Compile Include="Model\HistoryResponse.cs" />
     <Compile Include="Model\LoginResponse.cs" />
     <Compile Include="Model\MessageObject.cs" />
     <Compile Include="Model\SignUpForm.cs" />
@@ -170,6 +171,7 @@
     <Content Include="Assets\conversation_cloud_background_transparent.png" />
     <Content Include="Assets\edit.png" />
     <Content Include="Assets\next.png" />
+    <Content Include="Assets\room.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Resource Include="Assets\PanoramaBackground.png" />
