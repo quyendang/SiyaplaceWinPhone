@@ -15,6 +15,11 @@ using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Tasks;
 using System.IO;
+using Windows.Devices.Geolocation;
+using System.Device.Location;
+using System.Windows.Shapes;
+using System.Windows.Media;
+using Microsoft.Phone.Maps.Controls;
 
 namespace RAMACHAT
 {
@@ -111,6 +116,37 @@ namespace RAMACHAT
                     App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
                 }
             }
+        }
+
+        private async void ShowMyLocationOnTheMap()
+        {
+            Geolocator myGeolocator = new Geolocator();
+            Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
+            Geocoordinate myGeocoordinate = myGeoposition.Coordinate;
+            GeoCoordinate myGeoCoordinate =
+                CoordinateConverter.ConvertGeocoordinate(myGeocoordinate);
+            this.map.Center = myGeoCoordinate;
+            this.map.ZoomLevel = 15;
+            Ellipse myCircle = new Ellipse();
+            myCircle.Fill = new SolidColorBrush(Colors.Blue);
+            myCircle.Height = 20;
+            myCircle.Width = 20;
+            myCircle.Opacity = 50;
+            MapOverlay myLocationOverlay = new MapOverlay();
+            myLocationOverlay.Content = myCircle;
+            myLocationOverlay.PositionOrigin = new Point(0.5, 0.5);
+            myLocationOverlay.GeoCoordinate = myGeoCoordinate;
+            MapLayer myLocationLayer = new MapLayer();
+            myLocationLayer.Add(myLocationOverlay);
+            map.Layers.Add(myLocationLayer);
+
+        }
+
+
+        private void Map_Click(object sender, EventArgs e)
+        {
+            map.Visibility = Visibility.Visible;
+            ShowMyLocationOnTheMap();
         }
     }
 }
