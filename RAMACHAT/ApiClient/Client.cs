@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using RAMACHAT.Model;
+using RAMACHAT.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -93,19 +95,23 @@ namespace RAMACHAT.ApiClient
             var result = await GetAsync(ApiLink.getRoomMessageByUserIdLink() + id);
             Debug.WriteLine(result);
             MessageObject resultMessageObject = JsonConvert.DeserializeObject<MessageObject>(result);
-            foreach (var message in resultMessageObject.data)
+            for (int i = resultMessageObject.data.Count -1; i >= 0;i-- )
             {
-                if(message.type == 1)
+                if (resultMessageObject.data[i].type == 1)
                 {
-                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(message._userId.avatar), CreateAt = message.createdAt, MessageText = message.message, SenderID = message._userId._id, Type = message.type });
+                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(resultMessageObject.data[i]._userId.avatar), CreateAt = resultMessageObject.data[i].createdAt, MessageText = resultMessageObject.data[i].message, SenderID = resultMessageObject.data[i]._userId._id, Type = resultMessageObject.data[i].type });
                 }
                 else
                 {
-                    if (message.file.thumbnail != null)
-                    App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(message._userId.avatar), CreateAt = message.createdAt, SenderID = message._userId._id, Type = message.type, thumbnail = new Uri(message.file.thumbnail, UriKind.RelativeOrAbsolute) });
+                    if (resultMessageObject.data[i].file.thumbnail != null)
+                        App.ViewModel.Items.Add(new ViewModels.ItemViewModel() { Avatar = new Uri(resultMessageObject.data[i]._userId.avatar), CreateAt = resultMessageObject.data[i].createdAt, SenderID = resultMessageObject.data[i]._userId._id, Type = resultMessageObject.data[i].type, thumbnail = new Uri(resultMessageObject.data[i].file.thumbnail, UriKind.RelativeOrAbsolute) });
                 }
-                
             }
+                //foreach (var message in resultMessageObject.data)
+                //{
+                    
+
+                //}
         }
         public async Task<string> getAllFriends()
         {
