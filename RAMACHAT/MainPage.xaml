@@ -16,6 +16,7 @@
     shell:SystemTray.IsVisible="False">
     <phone:PhoneApplicationPage.Resources>
         <helper:ObjectToInt x:Key="ObjectToInt"/>
+        <helper:MemberConvert x:Key="MemberConvert"/>
         <DataTemplate x:Key="ImageOnLeftItemTemplate">
             <Grid HorizontalAlignment="Left"  >
                 <Grid.RowDefinitions>
@@ -158,7 +159,7 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Margin="10,0,0,0" FontSize="30" Text="{Binding updatedAt}" Grid.Row="0" VerticalAlignment="Center" />
+                                    <TextBlock Margin="10,0,0,0" FontSize="30" Text="{Binding members, Converter={StaticResource MemberConvert}}" Grid.Row="0" VerticalAlignment="Center" />
                                     <TextBlock Margin="10,0,0,0" FontSize="16" Foreground="Orange" Text="{Binding lastMessage.message}" Grid.Row="1" VerticalAlignment="Center" />
                                 </Grid>
 

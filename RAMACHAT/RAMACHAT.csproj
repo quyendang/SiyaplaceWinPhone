@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="CoordinateConverter.cs" />
     <Compile Include="Helper\IsolatedStorageHelper.cs" />
+    <Compile Include="Helper\MemberConvert.cs" />
     <Compile Include="Helper\ObjectToInt.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="LoginPage.xaml.cs">
