@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:RAMACHAT"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     xmlns:helper="clr-namespace:RAMACHAT.Helper"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     x:Class="RAMACHAT.ChatPage"
@@ -219,8 +220,9 @@
             </Grid.RowDefinitions>
             <ListBox Grid.Row="0" x:Name="ContactListBox" LayoutUpdated="ContactListBox_LayoutUpdated"
 				ItemTemplate="{StaticResource SelectingTemplate}" ItemsSource="{Binding Items}"/>
-            <TextBox Grid.Row="1" x:Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>
-
+            <!--<TextBox Grid.Row="1" x:Name="enter" FontSize="30" KeyDown="TextBox_KeyDown"/>-->
+            <c4f:ChatBubbleTextBox Grid.Row="1" x:Name="enter" KeyDown="TextBox_KeyDown"
+						Hint="type a message"/>
             <maps:Map x:Name="map" Visibility="Collapsed" HorizontalAlignment="Center" Height="250" Width="420" Margin="10,5,10,5" VerticalAlignment="Center" Grid.Row="2"/>
 
         </Grid>
