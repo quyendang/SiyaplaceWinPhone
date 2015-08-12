@@ -32,9 +32,19 @@ namespace RAMACHAT
         {
             InitializeComponent();
             DataContext = App.ViewModel;
+            //App.viewModel.addThemeList();
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //string ThemeChat = 
+            //App.viewModel.setThemChat(1);
+            try
+            {
+                App.ViewModel.getAllThemChat();
+            }
+                
+            catch { }
+            ThemListBox.ItemsSource = App.ViewModel.ThemeChatlist;
                 try
                 {
                     string userInfo = await App.client.getUserById(App._reuserid);
@@ -147,6 +157,23 @@ namespace RAMACHAT
         {
             map.Visibility = Visibility.Visible;
             ShowMyLocationOnTheMap();
+        }
+
+        private void setThemebtn_Click(object sender, EventArgs e)
+        {
+            Background.ImageSource = new BitmapImage(new Uri("/ThemeChat/1.jpg", UriKind.RelativeOrAbsolute));
+        }
+
+        private void SetTheme_Click(object sender, EventArgs e)
+        {
+            ThemePanel.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void ThemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var x = ThemListBox.SelectedItem as RAMACHAT.ThemeChat.ThemeChatItem;
+            Background.ImageSource = new BitmapImage(new Uri(x.ImageSource, UriKind.RelativeOrAbsolute));
+            ThemePanel.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

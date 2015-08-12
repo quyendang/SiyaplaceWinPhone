@@ -132,6 +132,7 @@
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThemeChat\ThemeChatItem.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
@@ -174,6 +175,9 @@
     <Content Include="Assets\edit.png" />
     <Content Include="Assets\next.png" />
     <Content Include="Assets\room.png" />
+    <Content Include="ThemeChat\1.jpg" />
+    <Content Include="ThemeChat\2.jpg" />
+    <Content Include="ThemeChat\3.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Resource Include="Assets\PanoramaBackground.png" />

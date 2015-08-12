@@ -181,14 +181,22 @@
     </phone:PhoneApplicationPage.Foreground>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
+        	<shell:ApplicationBar.MenuItems>
+        		<shell:ApplicationBarMenuItem Text="Change Theme" Click="SetTheme_Click"/>
+        	</shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton x:Name="imageChatBtn" IconUri="/Images/appbar_button1.png" Text="Image" Click="imageChatBtn_Click"/>
             <shell:ApplicationBarIconButton x:Name="cameraBtn" IconUri="/Images/appbar_button1.png" Text="Camera" Click="cameraBtn_Click"/>
             <shell:ApplicationBarIconButton x:Name="mapBtn" IconUri="/Images/appbar_button1.png" Text="Location" Click="Map_Click"/>
-
+            <shell:ApplicationBarIconButton x:Name="setThemebtn" IconUri="/Images/appbar_button1.png" Text="Change Theme" Click="setThemebtn_Click" />
+            
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        
+        <Grid.Background>
+            <ImageBrush x:Name="Background" ImageSource="{Binding CurentTheme}"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -207,11 +215,11 @@
                         <ImageBrush x:Name="avatar" AlignmentX="Center" AlignmentY="Center" />
                     </Ellipse.Fill>
                 </Ellipse>
-                <TextBlock x:Name="UserName" Text="aaaaaaaaaaaa" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="UserName" Text="aaaaaaaaaaaa" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Height="46" Margin="0,28,-92,26" Width="215" FontSize="24"/>
                 <Image/>
             </Grid>
         </StackPanel>
-
+        
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -226,5 +234,23 @@
             <maps:Map x:Name="map" Visibility="Collapsed" HorizontalAlignment="Center" Height="250" Width="420" Margin="10,5,10,5" VerticalAlignment="Center" Grid.Row="2"/>
 
         </Grid>
+        <StackPanel Name="ThemePanel" Visibility="Collapsed" Height="430" Margin="0" Grid.Row="1" Width="480" Canvas.ZIndex="5" Background="#FFC10000">
+            <Grid x:Name="theme" Width="480" Height="425" Canvas.ZIndex="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ListBox x:Name="ThemListBox" ItemsSource="{Binding ThemeChatlist}" SelectionChanged="ThemListBox_SelectionChanged">
+                    <ListBox.Resources>
+                        <DataTemplate x:Key="ListThemelate">
+                            <Grid d:DesignWidth="480" d:DesignHeight="120">
+                                <Image Source="{Binding ImageSource}" Margin="10"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <StaticResource ResourceKey="ListThemelate"/>
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+            </Grid>
+        </StackPanel>
+
     </Grid>
 </phone:PhoneApplicationPage>

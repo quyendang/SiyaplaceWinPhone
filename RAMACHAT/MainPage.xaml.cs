@@ -25,6 +25,7 @@ namespace RAMACHAT
         public MainPage()
         {
             InitializeComponent();
+            
             Dispatcher dispatcher = Deployment.Current.Dispatcher;
             dispatcher.BeginInvoke(() =>
             {
