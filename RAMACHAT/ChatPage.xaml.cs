@@ -42,19 +42,19 @@ namespace RAMACHAT
             {
                 App.ViewModel.getAllThemChat();
             }
-                
+
             catch { }
             ThemListBox.ItemsSource = App.ViewModel.ThemeChatlist;
-                try
-                {
-                    string userInfo = await App.client.getUserById(App._reuserid);
-                    FriendInfo userObject = JsonConvert.DeserializeObject<FriendInfo>(userInfo);
-                    UserName.Text = userObject.data.username;
-                    avatar.ImageSource = new BitmapImage(new Uri(userObject.data.avatar, UriKind.RelativeOrAbsolute));
-                    App.client.getRoomMessagesByUserId(App._reuserid);
-                }
+            try
+            {
+                string userInfo = await App.client.getUserById(App._reuserid);
+                FriendInfo userObject = JsonConvert.DeserializeObject<FriendInfo>(userInfo);
+                UserName.Text = userObject.data.username;
+                avatar.ImageSource = new BitmapImage(new Uri(userObject.data.avatar, UriKind.RelativeOrAbsolute));
+                App.client.getRoomMessagesByUserId(App._reuserid);
+            }
             catch
-                { }
+            { }
 
         }
         private void TextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -87,18 +87,18 @@ namespace RAMACHAT
         {
             if (e.TaskResult == TaskResult.OK)
             {
-               MemoryStream photoStream;
-               photoStream = new MemoryStream();
-               e.ChosenPhoto.CopyTo(photoStream);
-               string result = await App.client.PostImage(e.OriginalFileName, photoStream);
-               UploadImageResponse resultObject = JsonConvert.DeserializeObject<UploadImageResponse>(result);
-               if(resultObject.data._id !=null)
-               {
-                   JArray memberArray = new JArray();
-                   memberArray.Add(App._userid);
-                   memberArray.Add(App._reuserid);
-                   App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
-               }
+                MemoryStream photoStream;
+                photoStream = new MemoryStream();
+                e.ChosenPhoto.CopyTo(photoStream);
+                string result = await App.client.PostImage(e.OriginalFileName, photoStream);
+                UploadImageResponse resultObject = JsonConvert.DeserializeObject<UploadImageResponse>(result);
+                if (resultObject.data._id != null)
+                {
+                    JArray memberArray = new JArray();
+                    memberArray.Add(App._userid);
+                    memberArray.Add(App._reuserid);
+                    App.connectView.sendMesS(App._userid, false, resultObject.data._id, 2, App._username, memberArray, Convert.ToString(DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond));
+                }
             }
         }
 
@@ -174,6 +174,7 @@ namespace RAMACHAT
             var x = ThemListBox.SelectedItem as RAMACHAT.ThemeChat.ThemeChatItem;
             Background.ImageSource = new BitmapImage(new Uri(x.ImageSource, UriKind.RelativeOrAbsolute));
             ThemePanel.Visibility = System.Windows.Visibility.Collapsed;
+
         }
     }
 }
